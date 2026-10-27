@@ -1,0 +1,20 @@
+{
+  "flutter": "3.47.8",
+  "dart": "3.13.7",
+  "analyzer": "No issues found",
+  "tests_passed": 9,
+  "preset_render_tests": 10,
+  "xcode_object_references": "56 objects; no unresolved references",
+  "asset_validation": {
+    "art-index": 29186,
+    "thumb-index": 28463,
+    "errors": [],
+    "release_configuration_blockers": [
+      "AdMob test mode is enabled.",
+      "Production rewarded ad ID is missing."
+    ]
+  },
+  "ios_native_build": "Not performed",
+  "device_ad_consent_test": "Not performed",
+  "testflight_upload": "Not performed"
+}

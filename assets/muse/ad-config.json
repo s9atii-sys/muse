@@ -1,0 +1,10 @@
+{
+  "testMode": false,
+  "iosAppId": "ca-app-pub-6687779687898901~2706200093",
+  "iosInterstitialId": "ca-app-pub-6687779687898901/6697415993",
+  "iosRewardedId": "",
+  "childDirected": true,
+  "interstitialSeconds": 15,
+  "rewardOfferSeconds": 60,
+  "rewardedAdFreeSeconds": 30
+}

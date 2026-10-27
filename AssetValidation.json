@@ -1,0 +1,9 @@
+{
+  "art-index": 29186,
+  "thumb-index": 28463,
+  "errors": [],
+  "release_configuration_blockers": [
+    "AdMob test mode is enabled.",
+    "Production rewarded ad ID is missing."
+  ]
+}
