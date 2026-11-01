@@ -8,7 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_mobile_ads: 9.2.0
+  clever_ads_solutions: 4.8.0
   path_provider: 2.1.6
   file_picker: 13.2.0
   share_plus: 13.3.1
