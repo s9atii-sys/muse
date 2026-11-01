@@ -121,24 +121,26 @@ void main() {
     store.edit(() => store.character['profile_name'] = 'Changed');
     expect(copy['profile_name'], isNot('Changed'));
   });
-  test('ad clock thresholds, pause, overlap and earned reward', () {
+  test('CAS ad clock first/repeat thresholds, pause, overlap and earned reward', () {
     final c = AdClock();
     expect(c.interstitialEligible, false);
-    c.tick(14);
+    c.tick(9);
     expect(c.interstitialEligible, false);
     c.tick(1);
     expect(c.interstitialEligible, true);
-    c.tick(45);
+    c.tick(50);
     expect(c.rewardEligible, true);
     c.start();
     c.tick(30);
     expect(c.sinceReward, 60);
     expect(c.rewardEligible, false);
-    c.finish();
+    c.finish(countInterstitial: true);
     expect(c.adFree, 0);
     expect(c.sinceInterstitial, 0);
-    c.tick(20, active: false);
-    expect(c.sinceInterstitial, 0);
+    c.tick(29);
+    expect(c.interstitialEligible, false);
+    c.tick(1);
+    expect(c.interstitialEligible, true);
     c.start();
     c.earned();
     c.finish();
