@@ -33,7 +33,7 @@ class AdClock {
     if (!active || showing || !seconds.isFinite || seconds <= 0) return;
     sinceInterstitial += seconds;
     sinceReward += seconds;
-    adFree = math.max(0, adFree - seconds);
+    adFree = math.max(0.0, adFree - seconds);
   }
 
   void start() {
