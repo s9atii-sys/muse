@@ -34,28 +34,54 @@ Swift Package Manager is disabled for this project and its generated-package ref
 
 The interface supports phone portrait and landscape/tablet layouts. The preview temporarily hides when the keyboard leaves too little room for the editor.
 
-## AdMob
+## CAS.AI mediation
 
-**Google test ad units are enabled.** The AdMob app ID and interstitial production ID came from the supplied project. Confirm they belong to the intended app. The production rewarded ad unit ID is still missing.
+This branch replaces the direct `google_mobile_ads` integration with the official
+`clever_ads_solutions` Flutter plugin (CAS.AI 4.8.0). The configured CAS ID is
+`98993838`. The existing Google AdMob application ID remains in
+`ios/Runner/Info.plist` for the Google Ads mediation adapter.
 
-The interstitial becomes eligible after **15 seconds of active foreground use** and is attempted at a tab transition. The optional rewarded button becomes eligible after **60 seconds**, subject to consent and ad availability. Earning the reward grants **120 active seconds without interstitials**. Dismissing an ad without earning its reward grants nothing. Background time, consent forms and full-screen ad time do not advance the clock.
+The project was marked child-directed in its previous ad configuration. This
+integration therefore uses CAS.AI's **Families** mediation solution and sets
+`Audience.children`; it does not enable Advertising ID / IDFA or add an App
+Tracking Transparency prompt. The Families bundle includes the Google Ads
+(AdMob) adapter plus the networks listed by CAS for that solution. It does not
+mean every network from a separate waterfall/configuration is automatically
+included; check the current CAS dashboard and adapter compatibility before
+expecting a particular partner to serve.
 
-To synchronize test settings:
+### Interstitial and rewarded timing
 
-```sh
-python3 tool/configure_ads.py --test
-```
+- First interstitial becomes eligible after **10 seconds** of active foreground use.
+- After an interstitial is dismissed, the next becomes eligible after **30 seconds**.
+- Interstitials are attempted only at an editor tab transition (a natural break).
+- Rewarded offer becomes eligible after 60 active seconds. A successfully earned
+  reward grants 120 seconds without interstitials.
+- Background time and time while a full-screen ad or consent form is showing do
+  not advance the clocks.
 
-Before production, supply your real rewarded ID (and override the other IDs if needed):
+CAS auto-reloads both ad formats. Test ads are enabled by default, including in
+release builds. Keep `testMode: true` while validating. Change it to `false`
+only after confirming the CAS app ID, mediation partners, consent configuration
+and production readiness.
 
-```sh
-python3 tool/configure_ads.py --production --rewarded-id YOUR_IOS_REWARDED_ID
-python3 tool/verify_project.py --release
-```
+### iOS setup
 
-The script updates both `assets/muse/ad-config.json` and `ios/Runner/Info.plist`. Edit these using the script so their app IDs stay synchronized. Test mode uses Google's sample **ad units**, with your configured app ID so UMP can use your app's Privacy & messaging configuration.
+The Podfile now includes the CAS CocoaPods source and
+`CleverAdsSolutions-SDK/Families` 4.8.0. The CAS configuration script also
+needs to be run on the Mac before the first iOS build so it can synchronize
+CAS settings, Google adapter app metadata and attribution identifiers:
 
-The original child-directed audience setting is retained, using the SDK's current age-restricted treatment API and G ad-content rating. Review that setting against your actual audience and configure your own AdMob Privacy & messaging forms. This port does not request tracking authorization.
+1. Download the official `casconfig.rb` from the
+   [CAS-iOS 4.8.0 repository](https://github.com/cleveradssolutions/CAS-iOS/blob/4.8.0/Script%20XCodeConfig/casconfig.rb)
+   into the `ios` folder.
+2. Run `cd ios && ruby casconfig.rb 98993838`.
+3. Run `cd .. && flutter pub get && cd ios && pod install && cd ..`.
+4. Open `ios/Runner.xcworkspace` and build with your signing team.
+
+The script may update `Info.plist` and the Xcode project. Review those changes
+before committing them. Do not enable tracking or Advertising ID for a
+child-directed app.
 
 ## Validation and iOS release
 
