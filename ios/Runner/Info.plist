@@ -66,6 +66,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CASAIAppIdentifier</key>
+	<string>98993838</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-6687779687898901~2706200093</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
