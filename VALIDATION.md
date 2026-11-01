@@ -1,6 +1,6 @@
 # Validation results
 
-Validated with **Flutter 3.47.8 / Dart 3.13.7** on Linux.
+The original Flutter project baseline was validated with **Flutter 3.47.8 / Dart 3.13.7** on Linux before the CAS.AI integration. The CAS.AI branch has not yet been run through Flutter analysis/tests or native iOS compilation.
 
 - `flutter analyze --no-pub`: **No issues found**.
 - `flutter test --no-pub --reporter expanded`: **9 tests passed**.
@@ -15,7 +15,7 @@ Validated with **Flutter 3.47.8 / Dart 3.13.7** on Linux.
 
 ## Still requiring Mac/device checks
 
-CocoaPods resolution, Xcode/Swift/Objective-C compilation, signed iOS installation, native file picker/share sheet, music playback, actual AdMob/UMP presentation, memory/performance and TestFlight upload have not been performed here. Widget tests do not validate those native SDK flows.
+After CAS integration, CocoaPods resolution, Xcode/Swift/Objective-C compilation, signed iOS installation, native file picker/share sheet, music playback, actual CAS consent/ad presentation, memory/performance and TestFlight upload have not been performed here. Widget tests do not validate those native SDK flows.
 
 CAS.AI test ads are enabled by default. Native CocoaPods resolution and Xcode compilation still require Mac validation.
 
