@@ -36,7 +36,7 @@ The interface supports phone portrait and landscape/tablet layouts. The preview 
 
 ## CAS.AI mediation
 
-This branch replaces the direct `google_mobile_ads` integration with the official
+This repository currently contains an iOS host project only; the CAS Flutter plugin supports both Android and iOS, but Android host files must be generated before an Android build. This branch replaces the direct `google_mobile_ads` integration with the official
 `clever_ads_solutions` Flutter plugin (CAS.AI 4.8.0). The configured CAS ID is
 `98993838`. The existing Google AdMob application ID remains in
 `ios/Runner/Info.plist` for the Google Ads mediation adapter.
